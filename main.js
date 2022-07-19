@@ -1,15 +1,15 @@
 //---Variables----
-var form=document.getElementById('add-frm');
-var items=document.getElementById('items');
-var ntitle=document.getElementById('n-title');
-var nbody=document.getElementById('n-body');
+var form=document.querySelector('#add-frm');
+var items=document.querySelector('#items');
+var ntitle=document.querySelector('#n-title');
+var nbody=document.querySelector('#n-body');
 
-var tableDiv=document.getElementById('tbl-div');
-var search=document.getElementById('srch');
+var tableDiv=document.querySelector('#tbl-div');
+var search=document.querySelector('#srch');
 
 var noteCount=0;
 var newNote='';
-
+var contentNote='';
 
 //----Events----
 
@@ -69,21 +69,27 @@ function addNote(e){
         //new td for title and body
         var td1=document.createElement('td');
         td1.appendChild(document.createTextNode(ntitle.value));
-        var span=document.createElement('span');
+		 contentNote=nbody.value;
+		 document.querySelector('#myModalCt').textContent=contentNote;
+        /*var span=document.createElement('span');
         span.className='node-body';
         span.appendChild(document.createTextNode(nbody.value));
         td1.appendChild(span);
-
-        console.log(span);
+*/
+       // console.log(span);
 
         //New td for view
 
         var td2=document.createElement('td');
         td2.className='btcellv';
-        var btn1=document.createElement("button");
+        /*var btn1=document.createElement("button");
         btn1.appendChild(document.createTextNode('View'));
         btn1.setAttribute('id','vw');
-        td2.appendChild(btn1);
+        td2.appendChild(btn1);*/
+		td2.innerHTML="<button id='vw' onclick=viewCntnt()> View </button>"
+		
+		
+		
 
         //New td for delete
 
@@ -91,10 +97,15 @@ function addNote(e){
 
         var td3=document.createElement('td');
         td3.className='btcelld';
-        var btn2=document.createElement("button");
+        /*var btn2=document.createElement("button");
         btn2.appendChild(document.createTextNode('Delete'));
         btn2.setAttribute('id','del');
-        td3.appendChild(btn2);
+        td3.appendChild(btn2);*/
+		td3.innerHTML="<button id='del' onclick=remove(this.parentElement)> Delete </button>"
+		
+		
+		
+		
 
         //Add all tds o tr
 
@@ -124,6 +135,28 @@ function addNote(e){
 
     }
 }
+function remove(elmnt){
+			elmnt.parentElement.style.display="none";
+			style.display = "block";
+		}
+		
+function viewCntnt(){
+	document.querySelector('#myModal').style.display = "block";
+	
+}
+document.querySelector('#myModal').onclick=function(){
+	this.style.display = "none";
+	
+};
+
+/*
+var rw=document.querySelector("#del");
+rw.addEventListner("click",function(){
+	console.log("hi");
+	
+	
+});*/
+
 
 //Search Note
 
